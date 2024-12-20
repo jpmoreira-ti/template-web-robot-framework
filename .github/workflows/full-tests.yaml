@@ -1,0 +1,54 @@
+name: Run WEB Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 12 * * *'    
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m venv web-template
+        source web-template/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        robot --outputdir output tests
+
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: robot-framework-results
+        path: output/
+
+    - name: Download Test Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: robot-framework-results
+        path: output/
+        
+    - name: Send report to commit
+      uses: joonvena/robotframework-reporter-action@v2.5
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        failed_tests_on_top: true
+        summary: true
+        report_path: output/        
