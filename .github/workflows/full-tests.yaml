@@ -23,27 +23,27 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+    - name: Set up Python environment and install dependencies
       run: |
         python -m venv web-template
         source web-template/bin/activate
         pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run web tests
       run: |
-        robot --outputdir output tests
+        robot --outputdir report tests
 
     - name: Upload Test Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: robot-framework-results
-        path: output/
+        path: report/
 
     - name: Download Test Artifacts
       uses: actions/download-artifact@v4
       with:
         name: robot-framework-results
-        path: output/
+        path: report/
         
     - name: Send report to commit
       uses: joonvena/robotframework-reporter-action@v2.5
@@ -51,4 +51,4 @@ jobs:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}
         failed_tests_on_top: true
         summary: true
-        report_path: output/        
+        report_path: report/        
