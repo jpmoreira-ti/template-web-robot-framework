@@ -25,14 +25,12 @@ jobs:
 
     - name: Set up Python environment and install dependencies
       run: |
-        python -m venv web-template
+        python3 -m venv web-template
         source web-template/bin/activate
         pip install -r requirements.txt
 
     - name: Run web tests
       run: |
-        source web-template/bin/activate
-        cd web-template
         robot --outputdir report tests
 
     - name: Upload Test Artifacts
