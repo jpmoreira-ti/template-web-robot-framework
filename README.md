@@ -1,12 +1,12 @@
 # Project Name
-WEB test template with [Robot framework](https://robotframework.org/). The WEB Page used in this project is from [QualityToolsAutomation](https://qualitytoolsautomation.com.br/).
+WEB Test Template with [Robot framework](https://robotframework.org/). The web page used in this project is [QualityToolsAutomation](https://qualitytoolsautomation.com.br/).
 
 ## Dependencies
 - [RobotFramework](https://github.com/robotframework/robotframework/)
 - [robotframework-seleniumlibrary](https://github.com/robotframework/SeleniumLibrary/)
 
 ## Installation
-To create a virtual environment and install the project dependencies, run the following commands:
+To create a virtual environment, activate the virtual environment and install the project dependencies, run the following commands:
 
 ```sh
 python3 -m venv web-template
@@ -15,10 +15,10 @@ pip3 install -r requirements.txt
 ```
 
 ## Execution
-To run the tests, first activate the virtual environment and then execute the tests from the web-template folder:
+To run the tests, run the following commands:
 
 ```sh
-robot --outputdir output tests
+robot --outputdir report tests
 ```
 
 ## Plugins
