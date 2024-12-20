@@ -128,3 +128,6 @@ log/**
 
 # VSCode
 .vscode/
+
+# Virtual Env
+web-template/
