@@ -11,7 +11,7 @@ on:
     - cron: '0 12 * * *'    
 
 jobs:
-  test:
+  web-tests:
     runs-on: ubuntu-latest
 
     steps:
