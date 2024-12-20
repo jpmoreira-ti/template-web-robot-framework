@@ -31,6 +31,7 @@ jobs:
 
     - name: Run web tests
       run: |
+        source web-template/bin/activate
         robot --outputdir report web-template/tests
 
     - name: Upload Test Artifacts
