@@ -7,7 +7,7 @@ ${BASE_URL}   https://www.saucedemo.com/
 
 *** Keywords ***
 Setup Browser
-    New Browser   ${BROWSER}    headless=${False}
+    New Browser   ${BROWSER}    headless=${True}
     New Page      ${BASE_URL}
     Set Viewport Size    1920    1080
 
