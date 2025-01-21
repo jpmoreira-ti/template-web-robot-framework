@@ -42,13 +42,13 @@ jobs:
     - name: Upload Test Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-firefox
         path: reports/firefox
 
     - name: Download Test Artifacts
       uses: actions/download-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-firefox
         path: reports/firefox
         
     - name: Send report to commit
@@ -90,13 +90,13 @@ jobs:
     - name: Upload Test Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-chromium
         path: reports/chromium
 
     - name: Download Test Artifacts
       uses: actions/download-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-chromium
         path: reports/chromium
         
     - name: Send report to commit
@@ -138,13 +138,13 @@ jobs:
     - name: Upload Test Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-webkit
         path: reports/webkit
 
     - name: Download Test Artifacts
       uses: actions/download-artifact@v4
       with:
-        name: robot-framework-results
+        name: robot-framework-results-webkit
         path: reports/webkit
         
     - name: Send report to commit
