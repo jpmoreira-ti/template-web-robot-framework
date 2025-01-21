@@ -1,0 +1,147 @@
+name: Run Web Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+      - cron: '0 20 * * *'
+
+jobs:
+  test-firefox:
+    runs-on: ubuntu-latest
+    env:
+      RFBROWSER_BROWSER: firefox
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Exec init rfbrowser
+      run: rfbrowser init 
+
+    - name: Run tests
+      run: robot --outputdir reports tests
+
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+
+    - name: Download Test Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+        
+    - name: Send report to commit
+      uses: joonvena/robotframework-reporter-action@v2.5
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        failed_tests_on_top: true
+        summary: true
+        report_path: reports/
+
+  test-chromium:
+    runs-on: ubuntu-latest
+    env:
+      RFBROWSER_BROWSER: chromium
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Exec init rfbrowser
+      run: rfbrowser init 
+
+    - name: Run tests
+      run: robot --outputdir reports tests
+
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+
+    - name: Download Test Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+        
+    - name: Send report to commit
+      uses: joonvena/robotframework-reporter-action@v2.5
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        failed_tests_on_top: true
+        summary: true
+        report_path: reports/    
+
+  test-webkit:
+    runs-on: ubuntu-latest
+    env:
+      RFBROWSER_BROWSER: webkit
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Exec init rfbrowser
+      run: rfbrowser init 
+
+    - name: Run tests
+      run: robot --outputdir reports tests
+
+    - name: Upload Test Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+
+    - name: Download Test Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: robot-framework-results
+        path: reports/
+        
+    - name: Send report to commit
+      uses: joonvena/robotframework-reporter-action@v2.5
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        failed_tests_on_top: true
+        summary: true
+        report_path: reports/    
